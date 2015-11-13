@@ -2,6 +2,13 @@
 
 ## A tiny golang http server 
  
+
+#### Install 
+
+```
+  go get github.com/sundy-li/lori
+  
+``` 
 #### Example 
 
 ```
