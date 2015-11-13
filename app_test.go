@@ -1,9 +1,10 @@
 package lori
 
 import (
-	"lori/context"
-	"lori/handler"
 	"testing"
+
+	"github.com/sundy-li/lori/context"
+	"github.com/sundy-li/lori/handler"
 )
 
 type TestHandler struct {

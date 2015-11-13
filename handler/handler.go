@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"lori/context"
+	"github.com/sundy-li/lori/context"
 )
 
 type HandlerInterface interface {

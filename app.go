@@ -6,9 +6,9 @@ import (
 	"net/http/pprof"
 	"sunteng/commons/log"
 
-	"lori/context"
-	"lori/handler"
-	"lori/router"
+	"github.com/sundy-li/lori/context"
+	"github.com/sundy-li/lori/handler"
+	"github.com/sundy-li/lori/router"
 )
 
 type app struct {
@@ -19,6 +19,8 @@ type app struct {
 
 	routers   []*router.Router
 	routerMap map[string]*router.Router
+
+	NotFound func(c *context.Context)
 }
 
 var (
@@ -26,10 +28,13 @@ var (
 )
 
 func NewApp() *app {
-	return &app{
+	app := &app{
 		routers:   []*router.Router{},
 		routerMap: make(map[string]*router.Router),
 	}
+
+	app.NotFound = NotFound
+	return app
 }
 
 func (server *app) Route(pattern string, handler handler.HandlerInterface) *app {
@@ -60,6 +65,9 @@ func (server *app) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	if h != nil {
 		b := h
+		if ParseBody {
+			c.ParseBody()
+		}
 		defer b.OnFinally(c)
 
 		b.OnBefore(c)
@@ -84,7 +92,9 @@ func (server *app) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		b.OnAfter(c)
 
 	} else {
-		handler.NotFound(c)
+		if server.NotFound != nil {
+			server.NotFound(c)
+		}
 	}
 }
 
@@ -117,4 +127,8 @@ func Run(port ...string) {
 func Route(pattern string, handler handler.HandlerInterface) *app {
 	appServer.Route(pattern, handler)
 	return appServer
+}
+
+func NotFound(c *context.Context) {
+	c.ResponseWriter.WriteHeader(404)
 }

@@ -2,10 +2,11 @@ package router
 
 import (
 	"fmt"
-	"lori/context"
-	"lori/handler"
-	"lori/utils"
 	"regexp"
+
+	"github.com/sundy-li/lori/context"
+	"github.com/sundy-li/lori/handler"
+	"github.com/sundy-li/lori/utils"
 )
 
 var (
@@ -53,7 +54,6 @@ func (r *Router) Match(ctx *context.Context) (h handler.HandlerInterface, f bool
 		}
 		ctx.AddParams(ng)
 	} else {
-		println(ctx.Request.URL.Path, r.pattern)
 		if ctx.Request.URL.Path != r.pattern {
 			return
 		}

@@ -1,10 +1,11 @@
 package router
 
 import (
-	"lori/context"
-	"lori/handler"
 	"net/http"
 	"testing"
+
+	"github.com/sundy-li/lori/context"
+	"github.com/sundy-li/lori/handler"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"lori/context"
-	"lori/handler"
 
-	"lori"
+	"github.com/sundy-li/lori"
+	"github.com/sundy-li/lori/context"
+	"github.com/sundy-li/lori/handler"
 )
 
 type HelloHandler struct {

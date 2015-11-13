@@ -1,8 +1,7 @@
 # lori 
 
-## A simple golang http server
-
-- We are not building wheels, just for fun.
+## A tiny golang http server 
+ 
 #### Example 
 
 ```
@@ -10,10 +9,10 @@
 
 	import (
 		"fmt"
-		"lori/context"
-		"lori/handler"
-
-		"lori"
+		
+		"github.com/sundy-li/lori/context"
+		"github.com/sundy-li/lori/handler"
+		"github.com/sundy-li/lori"
 	)
 
 	type HelloHandler struct {
