@@ -1,10 +1,10 @@
 package lori
 
 import (
+	"log"
 	"net"
 	"net/http"
 	"net/http/pprof"
-	"sunteng/commons/log"
 
 	"github.com/sundy-li/lori/context"
 	"github.com/sundy-li/lori/handler"
@@ -114,7 +114,7 @@ func (server *app) Run(port ...string) {
 	var address = server.Addr + server.Port
 	listener, err := net.Listen("tcp", address)
 	if err != nil {
-		log.Errorf("error listen to %s, %s", address, err.Error())
+		log.Fatalf("error listen to %s, %s", address, err.Error())
 	}
 	err = http.Serve(listener, mux)
 	http.ListenAndServe(address, mux)
